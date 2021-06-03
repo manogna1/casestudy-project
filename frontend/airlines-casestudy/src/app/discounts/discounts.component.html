@@ -1,0 +1,96 @@
+<button class="btn btn-primary" data-toggle="modal" data-target="#discountModal">Add New Discount</button>
+
+<div class="alert alert-success" *ngIf="isAdded">
+    Discount Added Successfully
+  </div>
+  <div class="alert alert-success" *ngIf="isUpdated">
+    Discount Updated Successfully
+  </div>
+<div class="alert alert-success" *ngIf="isDeleted">
+    Deleted Successfully
+  </div>
+
+
+<!-- Add Discount Modal -->
+<div class="modal fade" id="discountModal" tabindex="-1" role="dialog" aria-labelledby="discountModalLabel"
+    aria-hidden="true">
+    <div class="modal-center">
+        <div class="modal-dialog .modal-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="discountModalLabel">Add New Discount</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="addDiscountForm" (ngSubmit)="handleSaveDiscount()">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" formControlName="name" class="form-control my-input" id="name"
+                                placeholder="Name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required"> Discount title is required</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Discount code</label>
+                                <input type="text" formControlName="code" class="form-control my-input" id="code"
+                                    placeholder="code" [ngClass]="{ 'is-invalid': submitted && f.code.errors }">
+                                <div *ngIf="submitted && f.code.errors" class="invalid-feedback">
+                                    <div *ngIf="f.code.errors.required"> Discount code is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Percent of discount</label>
+                                <input type="number" formControlName="percent" class="form-control my-input"
+                                    id="percent" [ngClass]="{ 'is-invalid': submitted && f.percent.errors }"
+                                    placeholder="percent">
+                                <div *ngIf="submitted && f.percent.errors" class="invalid-feedback">
+                                    <div *ngIf="f.percent.errors.required"> Discount percentage is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Valid From</label>
+                                <input type="date" formControlName="from" id="from" class="form-control my-input"
+                                    placeholder="Valid from" [ngClass]="{ 'is-invalid': submitted && f.from.errors }">
+                                <div *ngIf="submitted && f.from.errors" class="invalid-feedback">
+                                    <div *ngIf="f.from.errors.required"> Valid start date is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Valid To</label>
+                                <input type="date" formControlName="to" id="to" class="form-control my-input"
+                                    placeholder="Valid to" [ngClass]="{ 'is-invalid': submitted && f.to.errors }">
+                                <div *ngIf="submitted && f.to.errors" class="invalid-feedback">
+                                    <div *ngIf="f.to.errors.required"> Valid End date is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select class="form-control" formControlName="status"
+                                [ngClass]="{ 'is-invalid': submitted && f.status.errors }"
+                                [ngClass]="{ 'is-invalid': submitted && f.status.errors }">
+                                <option>New</option>
+                                <option>Active</option>
+                                <option>Expired</option>
+                            </select>
+                            <div *ngIf="submitted && f.status.errors" class="invalid-feedback">
+                                <div *ngIf="f.status.errors.required"> Discount status is required</div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button #discountModal type="submit" class="btn btn-primary" data-toggle="modal"
+                                [disabled]="addDiscountForm.invalid">Save Discount</button>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
