@@ -14,6 +14,7 @@ import { FlightsComponent } from './flights/flights.component';
 import { AirlinesComponent } from './airlines/airlines.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { DiscountsComponent } from './discounts/discounts.component';
+import { AdminHeaderComponent } from './admin-header/admin-header.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { DiscountsComponent } from './discounts/discounts.component';
     FlightsComponent,
     AirlinesComponent,
     NavBarComponent,
-    DiscountsComponent
+    DiscountsComponent,
+    AdminHeaderComponent
   ],
   imports: [
     BrowserModule,
