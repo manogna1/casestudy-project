@@ -1,0 +1,102 @@
+{
+  "discounts": [
+    {
+      "id": 1,
+      "name": "Fall Sale",
+      "code": "FALLSALE10",
+      "percent": 10,
+      "from": "06/03/2021",
+      "to": "06/30/2021",
+      "status": "Active"
+    },
+    {
+      "id": 2,
+      "name": "Fall Sale",
+      "code": "FALLSALE20",
+      "percent": 20,
+      "from": "06/03/2021",
+      "to": "06/30/2021",
+      "status": "Active"
+    },
+    {
+      "id": 3,
+      "name": "Winter Sale",
+      "code": "WINSALE15",
+      "percent": 15,
+      "from": "06/03/2021",
+      "to": "06/30/2021",
+      "status": "Active"
+    },
+    {
+      "id": 4,
+      "name": "Black Friday Sale",
+      "code": "BLFRI35",
+      "percent": 35,
+      "from": "06/03/2021",
+      "to": "06/30/2021",
+      "status": "Active"
+    },
+    {
+      "id": 5,
+      "name": "Fall Sale",
+      "code": "FALLSALE10",
+      "percent": 10,
+      "from": "06/03/2021",
+      "to": "06/30/2021",
+      "status": "Active"
+    }
+  ],
+  "airlines": [
+    {
+      "id": 11,
+      "name": "United Airlines",
+      "operations": "international",
+      "email": "customersupport@united.com",
+      "contact": "222-333-4444",
+      "address": "Washington D.C."
+    },
+    {
+      "id": 12,
+      "name": "American Airlines",
+      "operations": "international",
+      "email": "customersupport@american.com",
+      "contact": "212-323-4144",
+      "address": "Chicago"
+    },
+    {
+      "id": 13,
+      "name": "Southwest Airlines",
+      "operations": "domestic",
+      "email": "customersupport@southwest.com",
+      "contact": "221-331-4414",
+      "address": "Phoenix"
+    },
+    {
+      "id": 14,
+      "name": "Alaska Airlines",
+      "operations": "domestic",
+      "email": "alaskanairlinescs@alaskan.com",
+      "contact": "232-343-4344",
+      "address": "Dallas"
+    },
+    {
+      "name": "Frontier",
+      "operations": "regional",
+      "email": "customersupport@frontier.com",
+      "contact": "1142223333",
+      "address": "Denver, CO",
+      "id": 15
+    },
+    {
+      "name": "airline5",
+      "operations": "regional",
+      "email": "cs@za5.com",
+      "contact": "2222222222",
+      "address": "Denton, TX",
+      "id": 18
+    }
+  ],
+  "flights": {
+    "name": "typicode"
+  }
+}
