@@ -38,6 +38,15 @@ public class Flight implements Serializable {
 	private String description;
 	@Transient
 	private int airlineId;
+	private Long totalNoOfSeats;
+
+	public Long getTotalNoOfSeats() {
+		return totalNoOfSeats;
+	}
+
+	public void setTotalNoOfSeats(Long totalNoOfSeats) {
+		this.totalNoOfSeats = totalNoOfSeats;
+	}
 
 	public int getAirlineId() {
 		return airlineId;
