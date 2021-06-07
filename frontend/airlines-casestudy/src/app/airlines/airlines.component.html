@@ -1,0 +1,183 @@
+<div class="alert alert-success" *ngIf="isAdded">
+    Airline Added Successfully
+</div>
+<div class="alert alert-success" *ngIf="isUpdated">
+    Airline Updated Successfully
+</div>
+<div class="alert alert-success" *ngIf="isDeleted">
+    Airline Deleted Successfully
+</div>
+<div class="container">
+    <div class="table-responsive">
+    <table class="table table-striped custab">
+    <thead>
+    <a href="#"  class="btn btn-primary pull-right" role="button" data-toggle="modal" data-target="#airlineModal"><b>+</b> Add new airline</a>
+        <tr>
+            <th>ID</th>
+            <th>Airline Name</th>
+            <th>Operations</th>
+            <th>Email </th>
+            <th>Contact </th>
+            <th>Address</th>
+            
+            <th class="text-center">Actions</th>
+        </tr>
+    </thead>
+           <tr *ngFor="let airline of airlinesList">
+               <td>{{airline.id}}</td>
+               <td>{{airline.name}}</td>
+               <td>{{airline.operations}}</td>
+               <td>{{airline.email}}</td>
+               <td>{{airline.contact}}</td>
+               <td>{{airline.address}}</td>
+               <td>
+                   <button class="btn btn-primary" role="button" data-toggle="modal" data-target="#editAirlineModal" (click)="handleEditAirline(airline)" >Edit</button>
+                   <button class="btn btn-danger" role="button" (click)="handleDeleteAirline(airline)">Delete</button>
+               </td>
+           </tr>
+
+    </table>
+    </div>
+</div>
+
+
+<!-- Add Airline Modal -->
+<div class="modal fade" id="airlineModal" tabindex="-1" role="dialog" aria-labelledby="airlineModalLabel"
+    aria-hidden="true">
+    <div class="modal-center">
+        <div class="modal-dialog .modal-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="airlineModalLabel">Add New Airline</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="addAirlineForm" (ngSubmit)="handleSaveAirline()">
+                        <div class="form-group">
+                            <label>Airline Name</label>
+                            <input type="text" formControlName="name" class="form-control my-input" id="name"
+                                placeholder="Name" [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                                <div *ngIf="f.name.errors.required"> Airline Name is required</div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Operations</label>
+                                <select class="form-control" formControlName="operations"
+                                [ngClass]="{ 'is-invalid': submitted && f.operations.errors }"
+                                [ngClass]="{ 'is-invalid': submitted && f.operations.errors }">
+                                <option>international</option>
+                                <option>domestic</option>
+                                <option>regional</option>
+                            </select>
+                            <div *ngIf="submitted && f.operations.errors" class="invalid-feedback">
+                                <div *ngIf="f.operations.errors.required"> Airline operations is required</div>
+                            </div>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Contact</label>
+                                <input type="tel" maxlength="10" formControlName="contact" class="form-control my-input"
+                                    id="contact" [ngClass]="{ 'is-invalid': submitted && f.contact.errors }"
+                                    placeholder="contact">
+                                <div *ngIf="submitted && f.contact.errors" class="invalid-feedback">
+                                    <div *ngIf="f.contact.errors.required"> Contact is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label>Email</label>
+                                <input type="email" formControlName="email" id="email" class="form-control my-input"
+                                    placeholder="Enter email address" [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                                <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                                    <div *ngIf="f.email.errors.required"> Email is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Address</label>
+                                <input type="text" formControlName="address" id="address" class="form-control my-input"
+                                    placeholder="Enter city, state" [ngClass]="{ 'is-invalid': submitted && f.address.errors }">
+                                <div *ngIf="submitted && f.address.errors" class="invalid-feedback">
+                                    <div *ngIf="f.address.errors.required"> Address is required</div>
+                                </div>
+                            </div>
+                        </div>
+                      
+                    </form>
+                    <div class="modal-footer">
+                        <button #airlineModal type="submit" (click)="handleSaveAirline()" class="btn btn-primary" data-toggle="modal"
+                            [disabled]="addAirlineForm.invalid">Save Airline</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Edit Airline Modal -->
+<div class="modal fade" id="editAirlineModal" tabindex="-1" role="dialog" aria-labelledby="editAirlineModalLabel"
+    aria-hidden="true">
+    <div class="modal-center">
+        <div class="modal-dialog .modal-align-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="editAirlineModalLabel">Update Airline</h4>
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                            class="sr-only">Close</span>
+                    </button>
+                </div>
+                <div class="modal-body" *ngIf="duplicateAirline">
+                    <form (ngSubmit)="handleUpdateAirline()">
+                        <div class="form-group">
+                            <label>Airline Name</label>
+                            <input type="text" name="name" class="form-control"
+                                placeholder="Name" [(ngModel)]="duplicateAirline.name">
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <label>Operations</label>
+                                <select class="form-control" name="operations" [(ngModel)]="duplicateAirline.operations">
+                                <option>international</option>
+                                <option>domestic</option>
+                                <option>regional</option>
+                            </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Contact</label>
+                                <input type="tel" maxlength="10" name="contact" class="form-control"
+                                    id="contact" [(ngModel)]="duplicateAirline.contact"
+                                    placeholder="contact">
+                               
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label>Email</label>
+                                <input type="email" name="email" id="email" class="form-control" 
+                                    placeholder="Enter email address" [(ngModel)]="duplicateAirline.email">
+                               
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Address</label>
+                                <input type="text" name="address"  class="form-control"
+                                    placeholder="Enter city, state" [(ngModel)]="duplicateAirline.address">
+                              
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button #editAirlineModal role="button" type="submit" class="btn btn-primary" data-toggle="modal"
+                                >Update Airline</button>
+                        </div>
+                    </form>
+                   
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
