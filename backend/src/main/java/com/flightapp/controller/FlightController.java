@@ -17,7 +17,7 @@ import com.flightapp.entity.Airline;
 import com.flightapp.entity.Flight;
 import com.flightapp.model.FlightSearchResponse;
 import com.flightapp.model.Search;
-import com.flightapp.model.SearchResult;
+
 import com.flightapp.repository.AirlineRepository;
 import com.flightapp.service.FlightService;
 
